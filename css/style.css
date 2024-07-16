@@ -69,7 +69,8 @@ a {
 
 .Search {
     position: absolute;
-    top: 0;
+    display: grid;
+   top: 0%;
     left: 40%;
 }
 
@@ -85,7 +86,8 @@ input {
 .search-bar {
     border: 3px solid #1e1e26;
     border-radius: 3rem;
-    padding: 1rem 2rem;
+    padding: 1rem 1.5rem;
     position: relative;
+    background-color: transparent;
 
 }

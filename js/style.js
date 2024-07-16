@@ -18,7 +18,7 @@ var Name = document.querySelector(".marvel");
 const getInputvalue = (event) => {
   event.preventDefault();
   let searchText = searchform.search.value;
-  //   console.log(searchText)
+    console.log(searchText)
   
   fetchAllSuperHero(searchText);
 };
@@ -33,16 +33,36 @@ const fetchAllSuperHero = async (searchText) => {
   try {
     const response = await fetch(url);
     allData = await response.json();
+    const link = allData.data.results[0];
+    function imgReturn(text) {
+      // console.log( `Hero_data/imgs/${text}.png`);
+      return `Hero_data/imgs/${text}.png`
+    }
+    document.querySelector('.model').setAttribute('src',imgReturn(searchText))
+    if (!link.description) {
+      descp.innerHTML = "No data Present"
+      Name.innerHTML = ""
+    }else{
+    descp.innerHTML = link.description
+    Name.innerHTML = link.name
+  }
+
     console.log(allData);
-    allData.data["results"].forEach(element => {
-      // console.log(element.urls["0"]["url"]);
-      descp.innerHTML = `${element.description}`;
-      Name.innerHTML = `${element.name}`;
-      
-      // model.innerHTML = `<img src="${element.thumbnail["path"] + "." + element.thumbnail["extension"]}"/>`;
-    });
+    // console.log(allData.data.results[0].description);
+    // allData.data["results"].forEach(element => {
+    //   // console.log(element.urls["0"]["url"]);
+    //   descp.innerHTML = `${element.description}`;
+    //   Name.innerHTML = `${element.name}`;
+  
+    //   // model.innerHTML = `<img src="${element.thumbnail["path"] + "." + element.thumbnail["extension"]}"/>`;
+    // });
+    // console.log(`Hero_data/imgs/${searchText}.png`);
+   
+    // imgReturn(searchText)
+
 
   } catch {
+    descp.innerHTML = " No data Found"
     console.log(Error);
   }
 };
